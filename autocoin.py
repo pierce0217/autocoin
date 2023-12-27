@@ -20,7 +20,7 @@ upbit = pyupbit.Upbit(access, secret)
 bot = telebot.TeleBot(token=token)
 upbit.get_balances()
 last_checked_time = None
-crypto_list = ["KRW-BTC","KRW-SOL","KRW-BCH","KRW-ETH"]
+crypto_list = ["KRW-BTC","KRW-SOL","KRW-STX","KRW-NEAR","KRW-MATIC","KRW-MINA"]
 
 
 def telegramlog(message):
@@ -86,34 +86,44 @@ while True:
         buy_crypto(crypto_list[1])
         buy_crypto(crypto_list[2])
         buy_crypto(crypto_list[3])
+        buy_crypto(crypto_list[4])
+        buy_crypto(crypto_list[5])
         
         sell_crypto(crypto_list[0])
         sell_crypto(crypto_list[1])
         sell_crypto(crypto_list[2])
         sell_crypto(crypto_list[3])
+        sell_crypto(crypto_list[4])
+        sell_crypto(crypto_list[5])
         
         stoploss_crypto(crypto_list[0])
         stoploss_crypto(crypto_list[1])
         stoploss_crypto(crypto_list[2])
         stoploss_crypto(crypto_list[3])
+        stoploss_crypto(crypto_list[4])
+        stoploss_crypto(crypto_list[5])
         
-        roi_crypto_1 = ROC_crypto(crypto_list[0])
-        roi_crypto_2 = ROC_crypto(crypto_list[1])
-        roi_crypto_3 = ROC_crypto(crypto_list[2])
-        roi_crypto_4 = ROC_crypto(crypto_list[3]) 
+        roi_crypto_0 = ROC_crypto(crypto_list[0])
+        roi_crypto_1 = ROC_crypto(crypto_list[1])
+        roi_crypto_2 = ROC_crypto(crypto_list[2])
+        roi_crypto_3 = ROC_crypto(crypto_list[3])
+        roi_crypto_4 = ROC_crypto(crypto_list[4])
+        roi_crypto_5 = ROC_crypto(crypto_list[5])
         
         current_time = datetime.now()
         if last_checked_time is None or (current_time.minute == 00 and current_time != last_checked_time):
            telegramlog("YOUR CURRENT ROC IS "
-                 + str(crypto_list[0]) + " " + str(roi_crypto_1) + "%, "
-                 + str(crypto_list[1]) + " " + str(roi_crypto_2) + "%, "
-                 + str(crypto_list[2]) + " " + str(roi_crypto_3) + "%, "
-                 + str(crypto_list[3]) + " " + str(roi_crypto_4) + "%")     
+                 + str(crypto_list[0]) + " " + str(roi_crypto_0) + "%, "
+                 + str(crypto_list[1]) + " " + str(roi_crypto_1) + "%, "
+                 + str(crypto_list[2]) + " " + str(roi_crypto_2) + "%, "
+                 + str(crypto_list[3]) + " " + str(roi_crypto_3) + "%, "
+                 + str(crypto_list[4]) + " " + str(roi_crypto_4) + "%, "      
+                 + str(crypto_list[5]) + " " + str(roi_crypto_5) + "%")     
            last_checked_time = current_time
            wait_until_top_of_hour()
            
     except:
-        print("Error! ")
+        print("Error!")
         telegramlog("Bot Error!")
     
     time.sleep(1)
