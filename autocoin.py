@@ -54,11 +54,12 @@ def buy_crypto(crypto):
 
 def sell_crypto(crypto):
     current_price = pyupbit.get_current_price(crypto)
+    average_price = upbit.get_avg_buy_price(ticker=crypto)
     unit = upbit.get_balance(ticker=crypto)
     if current_price < get_candle_high_low_range(crypto)[3] and str(unit) != '0':
         upbit.sell_market_order(crypto, unit)
         amount = unit * current_price
-        profit = round((current_price/ upbit.get_avg_buy_price(ticker=crypto) - 1) * 100,2)
+        profit = round((current_price/ average_price - 1) * 100,2)
         telegramlog("SELL ORDER SUBMITTED "+str(amount)+" "+str(profit)+"%"+" "+str(crypto))
 
 def stoploss_crypto(crypto):
